@@ -1,5 +1,8 @@
 TMessagesProj/.externalNativeBuild/
 TMessagesProj/src/main/java/com/exteragram/messenger/boost/
+TMessagesProj/google-services.json
+
+.vscode/
 .gradle/
 .idea/
 build/
