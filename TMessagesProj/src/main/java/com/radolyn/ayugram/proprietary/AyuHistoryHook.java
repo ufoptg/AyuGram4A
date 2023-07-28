@@ -39,7 +39,7 @@ public abstract class AyuHistoryHook {
 //          for (MessageObject msg : messArr) {
 //              Log.d("AyuGram_HistoryHook", "id: " + msg.getId() + " (date: " + msg.messageOwner.date + ")");
 //          }
-        }
+//      }
         Iterator<TLRPC.User> it;
         Iterator<TLRPC.Chat> it2;
         MessagesStorage messagesStorage = MessagesStorage.getInstance(currentAccount);
