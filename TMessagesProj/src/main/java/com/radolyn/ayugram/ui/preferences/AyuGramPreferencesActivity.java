@@ -429,7 +429,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                     TextCheckCell2 checkCell = (TextCheckCell2) holder.itemView;
                     if (position == ghostModeToggleRow) {
                         int selectedCount = getGhostModeSelectedCount();
-                        checkCell.setTextAndCheck(LocaleController.getString(R.string.GhostModeToggle), selectedCount > 0, true, true);
+                        checkCell.setTextAndCheck(LocaleController.getString(R.string.GhostModeToggle), AyuConfig.isGhostModeActive(), true, true);
                         checkCell.setCollapseArrow(String.format(Locale.US, "%d/4", selectedCount), !ghostModeMenuExpanded, () -> {
                             AyuConfig.toggleGhostMode();
                             updateGhostViews();

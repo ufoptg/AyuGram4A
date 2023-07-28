@@ -225,6 +225,23 @@ public class AyuUtils {
         return text.subSequence(0, maxLength - 1) + "…";
     }
 
+    public static void blurify(MessageObject messageObject) {
+        if (messageObject == null || messageObject.messageOwner == null) {
+            return;
+        }
+
+        if (!TextUtils.isEmpty(messageObject.messageOwner.message)) {
+            var entity = new TLRPC.TL_messageEntitySpoiler();
+            entity.offset = 0;
+            entity.length = messageObject.messageOwner.message.length();
+            messageObject.messageOwner.entities.add(entity);
+        }
+
+        if (messageObject.messageOwner.media != null) {
+            messageObject.messageOwner.media.spoiler = true;
+        }
+    }
+
     public static CharSequence htmlToString(String text) {
         Spannable htmlParsed;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

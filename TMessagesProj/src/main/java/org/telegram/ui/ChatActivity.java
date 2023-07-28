@@ -15897,7 +15897,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     + " , isEnd: " + isEnd
                     + ", endReached[0]: " + endReached[0]
             );
-            if (!isInScheduleMode() && (startId != minVal || endId != minVal)) {
+            if (!isInScheduleMode() && chatMode != MODE_PINNED && (startId != minVal || endId != minVal)) {
                 var needToReset = messArr.size() == count;
                 AyuHistoryHook.doHook(currentAccount, messArr, messagesDict, startId, endId, dialogId, limit, topicId, isSecretChat());
                 if (needToReset) {
