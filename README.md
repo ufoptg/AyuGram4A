@@ -6,7 +6,7 @@ Other information about original project you can find [here](https://github.com/
 
 ## How to build
 
-Build instruction differs of [AyuGram](https://github.com/AyuGram/AyuGram4A) because you can't compile original project because of ["lack of some proprietary files"](https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram/tree/rewrite/TMessagesProj/src/main/java/com/radolyn/ayugram/proprietary)
+Build instruction differs from [AyuGram](https://github.com/AyuGram/AyuGram4A) because you can't compile original project because of ["lack of some proprietary files"](https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram/tree/rewrite/TMessagesProj/src/main/java/com/radolyn/ayugram/proprietary)
 
 There's two ways to compile AyuGram:
 
@@ -77,6 +77,8 @@ Ensure you have installed [Android Command Line Tools](https://developer.android
    Other tasks can be listed using `./gradlew tasks`
 
 ### Build via Android Studio
+
+Android studio can be downloaded [here](https://developer.android.com/studio)
 
 1. Clone this repository
 2. Open the project in Android Studio. It should be opened, **not imported**
