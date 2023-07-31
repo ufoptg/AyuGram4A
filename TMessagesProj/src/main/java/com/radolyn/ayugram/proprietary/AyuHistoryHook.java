@@ -208,7 +208,7 @@ public abstract class AyuHistoryHook {
                         }
                     }
                 }
-//              Collections.sort(messArr, comparator2);
+                Collections.sort(messArr, comparator2);
 //          }
         }
 //      {
