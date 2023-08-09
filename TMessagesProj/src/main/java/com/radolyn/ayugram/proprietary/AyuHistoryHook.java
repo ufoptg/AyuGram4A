@@ -247,48 +247,25 @@ public abstract class AyuHistoryHook {
     }
 
     private static int doHook_compareMessages(MessageObject a, MessageObject b) {
-//
-// Original pseudocode
-//
-//      int id = messageObject.getId();
-//      int id2 = messageObject2.getId();
-//      int i = messageObject.messageOwner.date;
-//      int i2 = messageObject2.messageOwner.date;
-//      if (id > 0 && id2 > 0) {
-//          if (id > id2) {
-//              return -1;
-//          }
-//          return id < id2 ? 1 : 0;
-//      } else if (id >= 0 || id2 >= 0) {
-//          if (i > i2) {
-//              return -1;
-//          }
-//          return i < i2 ? 1 : 0;
-//      } else if (id < id2) {
-//          return -1;
-//      } else {
-//          return id > id2 ? 1 : 0;
-//      }
-        int a_id = a.getId();
-        int b_id = b.getId();
-        int a_date = a.messageOwner.date;
-        int b_date = b.messageOwner.date;
-
-        if (a_id > 0 && b_id > 0) {
-            if (a_id > b_id) {
+        int id = a.getId();
+        int id2 = b.getId();
+        int i = a.messageOwner.date;
+        int i2 = b.messageOwner.date;
+        if (id > 0 && id2 > 0) {
+            if (id > id2) {
                 return -1;
-            } else if (a_id < b_id) {
-                return 1;
             }
-        } else if (a_id == 0 || b_id == 0) {
-            if (a_date > b_date) {
+            return id < id2 ? 1 : 0;
+        } else if (id >= 0 || id2 >= 0) {
+            if (i > i2) {
                 return -1;
-            } else if (a_date < b_date) {
-                return 1;
             }
+            return i < i2 ? 1 : 0;
+        } else if (id < id2) {
+            return -1;
+        } else {
+            return id > id2 ? 1 : 0;
         }
-
-        return 0;
     }
 
     /* JADX DEBUG: Failed to insert an additional move for type inference into block B:17:0x0056 */
