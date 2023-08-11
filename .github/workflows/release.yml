@@ -1,6 +1,5 @@
 name: Build release APK
-on:
-  push:
+on: workflow_dispatch
 
 jobs:
   build:
