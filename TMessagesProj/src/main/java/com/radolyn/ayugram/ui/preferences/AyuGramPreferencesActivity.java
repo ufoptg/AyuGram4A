@@ -119,7 +119,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
         showKillButtonInDrawerRow = newRow();
         customizationDividerRow = newRow();
 
-if (true) { // no ayusync begin
+if (false) { // no ayusync begin
         ayuSyncHeaderRow = newRow();
         ayuSyncStatusBtnRow = newRow();
         ayuSyncDividerRow = newRow();
