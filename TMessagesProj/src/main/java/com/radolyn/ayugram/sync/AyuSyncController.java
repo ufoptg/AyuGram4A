@@ -37,6 +37,7 @@ public class AyuSyncController {
     private final OkHttpClient client;
 
     public AyuSyncController() {
+if (true) throw new Exception("Tried to create AyuSyncController"); // no ayusync
         accounts = new HashMap<>();
 
         var clientBuilder = new OkHttpClient.Builder()
@@ -45,6 +46,7 @@ public class AyuSyncController {
     }
 
     public static void create() {
+if (true) return; // no ayusync
         if (instance != null && !(instance instanceof AyuSyncControllerEmpty)) {
             return;
         }
@@ -72,6 +74,7 @@ public class AyuSyncController {
     }
 
     public static void nullifyInstance() {
+if (true) return; // no ayusync
         if (instance == null || instance instanceof AyuSyncControllerEmpty) {
             return;
         }

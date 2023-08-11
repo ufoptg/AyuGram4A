@@ -26,9 +26,11 @@ public class AyuSyncWebSocketClient extends WebSocketClient {
 
     private AyuSyncWebSocketClient(URI uri) {
         super(uri);
+if (true) throw new Exception("Tried to create AyuSyncWebSocketClient"); // no ayusync
     }
 
     public static boolean create() {
+if (true) return false; // no ayusync
         if (instance != null) {
             return true;
         }
@@ -64,6 +66,7 @@ public class AyuSyncWebSocketClient extends WebSocketClient {
     }
 
     public static void nullifyInstance() {
+if (true) return; // no ayusync
         if (instance == null) {
             return;
         }
