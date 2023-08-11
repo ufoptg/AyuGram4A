@@ -28,13 +28,13 @@ jobs:
         run: |
           echo "${{ secrets.GOOGLE_SERVICES_JSON_FILE_IN_BASE64 }}" \
           | base64 -d \
-          > ~/TMessagesProj/google-services.json
+          > ./TMessagesProj/google-services.json
 
       - name: Write signing keystore file
         run: |
           echo "${{ secrets.SIGNING_KEYSTORE_FILE_IN_BASE64 }}" \
           | base64 -d \
-          > ~/TMessagesProj/config/extera.jks
+          > ./TMessagesProj/config/extera.jks
 
       - name: Update packages
         run: sudo apt-get update
