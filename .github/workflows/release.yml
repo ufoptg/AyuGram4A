@@ -11,6 +11,9 @@ jobs:
       CCACHE_MAXSIZE: "10G"
       CCACHE_HARDLINK: "true"
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - uses: DamianReeves/write-file-action@master
         with:
           path: ./API_KEYS
