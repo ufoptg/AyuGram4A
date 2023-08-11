@@ -24,7 +24,7 @@ public class AyuSyncWebSocketClient extends WebSocketClient {
 
     private static AyuSyncWebSocketClient instance;
 
-    private AyuSyncWebSocketClient(URI uri) {
+    private AyuSyncWebSocketClient(URI uri) throws Exception {
         super(uri);
 if (true) throw new Exception("Tried to create AyuSyncWebSocketClient"); // no ayusync
     }

@@ -36,7 +36,7 @@ public class AyuSyncController {
     private final HashMap<Long, Integer> accounts;
     private final OkHttpClient client;
 
-    public AyuSyncController() {
+    public AyuSyncController() throws Exception {
 if (true) throw new Exception("Tried to create AyuSyncController"); // no ayusync
         accounts = new HashMap<>();
 
