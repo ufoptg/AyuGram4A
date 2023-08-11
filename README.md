@@ -1,17 +1,22 @@
 ## What's this fork even about?
 
-It's fork of [AyuGram for Android](https://github.com/AyuGram/AyuGram4A) without proprietary features.
+It's fork of [AyuGram for Android](https://github.com/AyuGram/AyuGram4A) ~~"without proprietary"~~ with no hidden source files and with **full code transparency unlike [original project](https://github.com/AyuGram/AyuGram4A)**. If you don't trust Github Actions, just [build apk by yourself](#where-do-i-find-apk)!
+
+The differences between original project and this fork:
+1. [Reverse engineered source files that was hidden in private repository](https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram/tree/rewrite/TMessagesProj/src/main/java/com/radolyn/ayugram/proprietary)
+2. You can build that application by yourself and forget about "implementing AyuHistoryHook and AyuMessageUtils"
+2. AyuStinc(Sync) removed
+3. [You can download APK directly from this repository](https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram/actions)
 
 Other information about original project you can find [here](https://github.com/AyuGram/AyuGram4A/blob/rewrite/README.md)
 
-## How to build
+## Where do i find APK?
 
-Build instruction differs from [AyuGram](https://github.com/AyuGram/AyuGram4A) because you can't compile original project because of ["lack of some proprietary files"](https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram/tree/rewrite/TMessagesProj/src/main/java/com/radolyn/ayugram/proprietary)
+There's three ways to get AyuGram:
 
-There's two ways to compile AyuGram:
-
-1. [Using Android Command Line Tools](#build-via-android-command-line-tools)
-2. [Using Android Studio](#build-via-android-studio)
+1. **[Download builded .apk from Github Actions](https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram/actions)**
+2. [Build it using Android Command Line Tools](#build-via-android-command-line-tools)
+3. [Build it using Android Studio](#build-via-android-studio)
 
 ### Build via Android Command Line Tools
 
