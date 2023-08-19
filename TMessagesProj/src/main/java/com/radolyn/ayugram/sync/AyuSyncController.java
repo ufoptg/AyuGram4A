@@ -36,8 +36,7 @@ public class AyuSyncController {
     private final HashMap<Long, Integer> accounts;
     private final OkHttpClient client;
 
-    public AyuSyncController() throws Exception {
-if (true) throw new Exception("Tried to create AyuSyncController"); // no ayusync
+    public AyuSyncController() {
         accounts = new HashMap<>();
 
         var clientBuilder = new OkHttpClient.Builder()
@@ -66,6 +65,7 @@ if (true) return; // no ayusync
     }
 
     public static AyuSyncController getInstance() {
+if (true) return null; // no ayusync
         if (instance == null) {
             create();
         }
@@ -87,6 +87,7 @@ if (true) return; // no ayusync
     }
 
     private static void enqueueRetry() {
+if (true) return; // no ayusync
         queue.postRunnable(() -> {
             try {
                 Thread.sleep(1500);
@@ -99,6 +100,7 @@ if (true) return; // no ayusync
     }
 
     private void loadAccounts() {
+if (true) return; // no ayusync
         accounts.clear();
 
         for (int id = 0; id < UserConfig.MAX_ACCOUNT_COUNT; id++) {
@@ -110,6 +112,7 @@ if (true) return; // no ayusync
     }
 
     public void connect() {
+if (true) return; // no ayusync
         if (TextUtils.isEmpty(AyuSyncConfig.getToken())) {
             nullifyInstance();
             AyuSyncState.setConnectionState(AyuSyncConnectionState.NoToken);
@@ -179,6 +182,7 @@ if (true) return; // no ayusync
     }
 
     private AyuUser getSelfForConnect() {
+if (true) return null; // no ayusync
         var url = AyuSyncConfig.getUserDataURL();
 
         var request = new Request.Builder()
@@ -204,10 +208,12 @@ if (true) return; // no ayusync
     }
 
     public void forceSync() {
+if (true) return; // no ayusync
         queue.postRunnable(this::forceSyncInner);
     }
 
     private void forceSyncInner() {
+if (true) return; // no ayusync
         var userId = UserConfig.getInstance(UserConfig.selectedAccount).getClientUserId();
 
         var url = AyuSyncConfig.getForceSyncURL();
@@ -235,6 +241,7 @@ if (true) return; // no ayusync
     }
 
     public void onForceSync(SyncForce req) {
+if (true) return; // no ayusync
         var accountId = accounts.get(req.userId);
 
         var controller = MessagesController.getInstance(accountId);
@@ -283,12 +290,15 @@ if (true) return; // no ayusync
     }
 
     public void onBatchSync(JsonObject req) {
+if (true) return; // no ayusync
+
         for (var event : req.getAsJsonObject("args").get("events").getAsJsonArray()) {
             invokeHandler(event.getAsJsonObject());
         }
     }
 
     public void syncRead(int accountId, long dialogId, int untilId) {
+if (true) return; // no ayusync
         var controller = MessagesController.getInstance(accountId);
         var dialog = controller.getDialog(dialogId);
         var unread = controller.getDialogUnreadCount(dialog);
@@ -310,19 +320,7 @@ if (true) return; // no ayusync
     }
 
     public void onSyncRead(SyncRead req) {
-        var accountId = accounts.get(req.userId);
-
-        var controller = MessagesController.getInstance(accountId);
-
-        var dialog = controller.getDialog(req.args.dialogId);
-        if (dialog.unread_count <= req.args.unread) {
-            return;
-        }
-
-        AyuGhostUtils.markReadLocally(accountId, req.args.dialogId, req.args.untilId, req.args.unread);
-    }
-
-    public void invokeHandler(JsonObject req) {
+if (true) return; // no ayusync
         Log.d("AyuSync", req.toString());
 
         var userId = req.get("userId").getAsLong();
@@ -352,6 +350,7 @@ if (true) return; // no ayusync
     }
 
     public boolean accountExists(long userId) {
+if (true) return false; // no ayusync
         return userId == 0 || accounts.containsKey(userId);
     }
 }
