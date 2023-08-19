@@ -321,6 +321,20 @@ if (true) return; // no ayusync
 
     public void onSyncRead(SyncRead req) {
 if (true) return; // no ayusync
+        var accountId = accounts.get(req.userId);
+
+        var controller = MessagesController.getInstance(accountId);
+
+        var dialog = controller.getDialog(req.args.dialogId);
+        if (dialog.unread_count <= req.args.unread) {
+            return;
+        }
+
+        AyuGhostUtils.markReadLocally(accountId, req.args.dialogId, req.args.untilId, req.args.unread);
+    }
+
+    public void invokeHandler(JsonObject req) {
+if (true) return; // no ayusync
         Log.d("AyuSync", req.toString());
 
         var userId = req.get("userId").getAsLong();
