@@ -29,6 +29,7 @@ public class AyuSyncWebSocketClient extends WebSocketClient {
     }
 
     public static boolean create() {
+if (true) return false; // no ayusync
         if (instance != null) {
             return true;
         }
@@ -56,6 +57,7 @@ public class AyuSyncWebSocketClient extends WebSocketClient {
     }
 
     public static AyuSyncWebSocketClient getInstance() {
+if (true) return null; // no ayusync
         if (instance == null) {
             create();
         }
@@ -64,6 +66,7 @@ public class AyuSyncWebSocketClient extends WebSocketClient {
     }
 
     public static void nullifyInstance() {
+if (true) return; // no ayusync
         if (instance == null) {
             return;
         }
@@ -82,6 +85,7 @@ public class AyuSyncWebSocketClient extends WebSocketClient {
 
     @Override
     public void send(String message) {
+if (true) return; // no ayusync
         try {
             super.send(message);
 
@@ -93,6 +97,7 @@ public class AyuSyncWebSocketClient extends WebSocketClient {
 
     @Override
     public void onOpen() {
+if (true) return; // no ayusync
         AyuSyncState.setConnectionState(AyuSyncConnectionState.Connected);
 
         Log.d("AyuSync", "Connected to the origin");
@@ -100,6 +105,7 @@ public class AyuSyncWebSocketClient extends WebSocketClient {
 
     @Override
     public void onTextReceived(String message) {
+if (true) return; // no ayusync
         AyuSyncState.setLastReceived((int) (System.currentTimeMillis() / 1000));
 
         try {
@@ -112,21 +118,25 @@ public class AyuSyncWebSocketClient extends WebSocketClient {
 
     @Override
     public void onBinaryReceived(byte[] data) {
+if (true) return; // no ayusync
         Log.d("AyuSync", "binary received");
     }
 
     @Override
     public void onPingReceived(byte[] data) {
+if (true) return; // no ayusync
 //        Log.d("AyuSync", "ping!");
     }
 
     @Override
     public void onPongReceived(byte[] data) {
+if (true) return; // no ayusync
 //        Log.d("AyuSync", "pong!");
     }
 
     @Override
     public void onException(Exception e) {
+if (true) return; // no ayusync
         AyuSyncState.setConnectionState(AyuSyncConnectionState.Disconnected);
 
         Log.e("AyuSync", e.toString());
@@ -151,6 +161,7 @@ public class AyuSyncWebSocketClient extends WebSocketClient {
 
     @Override
     public void onCloseReceived(int reason, String description) {
+if (true) return; // no ayusync
         AyuSyncState.setConnectionState(AyuSyncConnectionState.Disconnected);
 
         Log.d("AyuSync", "Disconnected from the origin: " + description);

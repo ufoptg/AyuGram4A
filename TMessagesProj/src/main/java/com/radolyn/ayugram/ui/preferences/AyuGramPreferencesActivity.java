@@ -119,9 +119,11 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
         showKillButtonInDrawerRow = newRow();
         customizationDividerRow = newRow();
 
+if (false) { // no ayusync begin
         ayuSyncHeaderRow = newRow();
         ayuSyncStatusBtnRow = newRow();
         ayuSyncDividerRow = newRow();
+} // no ayusync end
 
         debugHeaderRow = newRow();
         WALModeRow = newRow();
@@ -136,6 +138,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
         // todo: register `MESSAGES_DELETED_NOTIFICATION` on all notification centers, not only on the current account
 
         NotificationCenter.getInstance(UserConfig.selectedAccount).addObserver(this, AyuConstants.MESSAGES_DELETED_NOTIFICATION);
+if (false) // no ayusync
         NotificationCenter.getGlobalInstance().addObserver(this, AyuConstants.AYUSYNC_STATE_CHANGED);
 
         return true;
@@ -160,6 +163,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
         super.onFragmentDestroy();
 
         NotificationCenter.getInstance(UserConfig.selectedAccount).removeObserver(this, AyuConstants.MESSAGES_DELETED_NOTIFICATION);
+if (false) // no ayusync
         NotificationCenter.getGlobalInstance().removeObserver(this, AyuConstants.AYUSYNC_STATE_CHANGED);
     }
 
@@ -295,7 +299,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                     "editedMarkText",
                     LocaleController.getString("EditedMessage", R.string.EditedMessage) // don't remove key
             );
-        } else if (position == ayuSyncStatusBtnRow) {
+        } else if (false && position == ayuSyncStatusBtnRow) { // no ayusync
             presentFragment(new AyuSyncPreferencesActivity());
         } else if (position == WALModeRow) {
             AyuConfig.editor.putBoolean("WALMode", AyuConfig.WALMode ^= true).apply();
@@ -369,7 +373,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                         textCell.setTextAndValue(LocaleController.getString(R.string.DeletedMarkText), AyuConfig.getDeletedMark(), true);
                     } else if (position == editedMarkTextRow) {
                         textCell.setTextAndValue(LocaleController.getString(R.string.EditedMarkText), AyuConfig.getEditedMark(), true);
-                    } else if (position == ayuSyncStatusBtnRow) {
+                    } else if (false && position == ayuSyncStatusBtnRow) { // no ayusync
                         var status = AyuSyncState.getConnectionStateString();
 
                         textCell.setTextAndValue(LocaleController.getString(R.string.AyuSyncStatusTitle), status, false);
@@ -394,7 +398,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                         headerCell.setText(LocaleController.getString(R.string.QoLTogglesHeader));
                     } else if (position == customizationHeaderRow) {
                         headerCell.setText(LocaleController.getString(R.string.CustomizationHeader));
-                    } else if (position == ayuSyncHeaderRow) {
+                    } else if (false && position == ayuSyncHeaderRow) { // no ayusync
                         headerCell.setText(LocaleController.getString(R.string.AyuSyncHeader));
                     } else if (position == debugHeaderRow) {
                         headerCell.setText(LocaleController.getString("SettingsDebug", R.string.SettingsDebug));
@@ -481,7 +485,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                             position == spyDivider2Row ||
                             position == qolDividerRow ||
                             position == customizationDividerRow ||
-                            position == ayuSyncDividerRow ||
+                            (false && position == ayuSyncDividerRow) || // no ayusync
                             position == buttonsDividerRow
             ) {
                 return 1;
@@ -489,7 +493,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                     position == messageSavingBtnRow ||
                             position == deletedMarkTextRow ||
                             position == editedMarkTextRow ||
-                            position == ayuSyncStatusBtnRow ||
+                            (false && position == ayuSyncStatusBtnRow) || // no ayusync
                             position == clearAyuDatabaseBtnRow ||
                             position == eraseLocalDatabaseBtnRow
             ) {
@@ -499,7 +503,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                             position == spyHeaderRow ||
                             position == qolHeaderRow ||
                             position == customizationHeaderRow ||
-                            position == ayuSyncHeaderRow ||
+                            (false && position == ayuSyncHeaderRow) || // no ayusync
                             position == debugHeaderRow
             ) {
                 return 3;
