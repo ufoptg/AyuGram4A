@@ -16,6 +16,7 @@ There's three ways to get AyuGram:
 
 1. **[Download builded .apk from Github Actions](https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram/actions)**
 2. [Build it using Android Command Line Tools](#build-via-android-command-line-tools)
+3. [Build it using Github Actions](#set-up-github-actions)
 3. [Build it using Android Studio](#build-via-android-studio)
 
 ### Build via Android Command Line Tools
@@ -80,6 +81,21 @@ Ensure you have installed [Android Command Line Tools](https://developer.android
    | assembleX86 | **x86** |
 
    Other tasks can be listed using `./gradlew tasks`
+
+### Set up Github Actions
+
+#### You can generate base64 string via:
+- Linux terminal: `base64 <filename>`
+- Powershell: `[Convert]::ToBase64String([IO.File]::ReadAllBytes("<filename>"))`
+
+1. Generate keystore file [(it's <u>4th step</u> from the command line tools build instruction)](#build-via-android-command-line-tools) and [convert it into base64](#you-can-generate-base64-string-via)
+2. Generate google-services.json file and [convert it into base64](#you-can-generate-base64-string-via)
+3. [Go to repository settings > Secrets and variables > Actions](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
+4. Add **SIGNING_KEYSTORE_FILE_IN_BASE64** secret with **base64 string generated from <u>1st step</u>**
+5. Add **GOOGLE_SERVICES_JSON_FILE_IN_BASE64** secret with **base64 string generated from <u>2nd step</u>**
+6. Add **SIGNING_KEY_PASSWORD** secret with **keystore file password** value
+7. Add **SIGNING_KEY_ALIAS** secret with **keystore alias name** value
+8. Now you're ready to [run build workflow](https://docs.github.com/en/actions/using-workflows/manually-running-a-workflow#running-a-workflow)!
 
 ### Build via Android Studio
 
