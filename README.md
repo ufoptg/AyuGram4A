@@ -12,7 +12,7 @@ Other information about original project you can find [here](https://github.com/
 
 ## Where do i find APK?
 
-There's three ways to get AyuGram:
+There's multiple ways to get AyuGram:
 
 1. **[Download builded .apk from Github Actions](https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram/actions)**
 2. [Build it using Android Command Line Tools](#build-via-android-command-line-tools)
