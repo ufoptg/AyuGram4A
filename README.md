@@ -1,124 +1,111 @@
-# AyuGram for Android
-
-![AyuGram Logo](.github/AyuGram.png)
-
 ## What's this fork even about?
 
-**Is it just exteraGram+Telegraher?**
+It's fork of [AyuGram for Android](https://github.com/AyuGram/AyuGram4A) ~~"without proprietary"~~ with no hidden source files and with **full code transparency unlike [original project](https://github.com/AyuGram/AyuGram4A)**. If you don't trust Github Actions, just [build apk by yourself](#where-do-i-find-apk)!
 
-**AyuGram4A** is a fork of [exteraGram](https://github.com/exteraSquad/exteraGram) with
-some patches from [Telegraher](https://github.com/nikitasius/Telegraher).
+The differences between original project and this fork:
+1. [Reverse engineered source files that was hidden in private repository](https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram/tree/rewrite/TMessagesProj/src/main/java/com/radolyn/ayugram/proprietary)
+2. You can build that application by yourself and forget about "implementing AyuHistoryHook and AyuMessageUtils"
+2. AyuStinc(Sync) removed
+3. [You can download APK directly from this repository](https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram/actions)
 
-But it's not just exteraGram with Telegraher's commits, **it's a fully reworked version**.
+Other information about original project you can find [here](https://github.com/AyuGram/AyuGram4A/blob/rewrite/README.md)
 
-The main difference between AyuGram and Telegraher is that AyuGram **saves** your messages history,
-while Telegraher just **caches** them.
-It means that you can clean your cache and still have all saved messages.
+## Where do i find APK?
 
-Also, AyuGram has **full ghost mode**.
-It allows you to hide your online status from other users, even if you send them
-a message.
+There's multiple ways to get AyuGram:
 
-*And, well, it's not an Iranian Telegram fork with floating TV or something.*
+1. **[Download builded .apk from Github Actions](https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram/actions)**
+2. [Build it using Android Command Line Tools](#build-via-android-command-line-tools)
+3. [Build it using Github Actions](#set-up-github-actions)
+3. [Build it using Android Studio](#build-via-android-studio)
 
-## Features list
+### Build via Android Command Line Tools
 
-### Telegraher's patches:
+Ensure you have installed [Android Command Line Tools](https://developer.android.com/tools)
 
-- Built with official keys
-- Screenshots in secret chats
-- No emulator detection
-- No ads
+1. **Clone this repository**
 
-### Reworked Telegraher's patches:
+   `git clone https://github.com/Dr4iv3rNope/NotSoAndroidAyuGram.git`
 
-- Save chats where you were banned/kicked
-- Expire button for TTL photos/videos
-- ...something else probably
+2. **Navigate to repository**
 
-### Our features:
+   `cd NotSoAndroidAyuGram`
 
-- Full ghost mode (flexible)
-- Messages history (flexible)
-- Message filters (e.g. hide ads)
-- Customizable edited/deleted marks
-- Local Telegram Premium
-- Sync read states and message history with AyuSync
-- Up to stream Telegram version (*snidely*)
+3. **Create "local.properties" and add "sdk.dir" variable**
 
-Note that we use **Crashlytics**.
-If you don't want to send crash reports, you can disable it in **exteraGram Preferences**.
+   ```
+   sdk.dir=/path/to/android-sdk
+   ```
 
-**AyuGram4A** does **NOT** include proprietary **exteraGram** features.
+4. **Generate signing keys**
 
-## Preview
+   Command example: `keytool -genkey -v -keystore release-key.keystore -alias release-key-alias -keyalg RSA -keysize 2048 -validity 10000`
 
-💖 **Made with extera's Monet theme.**
+5. **Put generated .keystore file to TMessagesProj/config/extera.jks**
 
-<img src='.github/demos/demo1.png' width='210'> <img src='.github/demos/demo2.png' width='210'>
+   `mv release-key.keystore TMessagesProj/config/extera.jks`
 
-<img src='.github/demos/demo3.png' width='210'> <img src='.github/demos/demo4.png' width='210'>
+6. **Create API_KEYS file with following content**
 
-<img src='.github/demos/demo5.png' width='210'> <img src='.github/demos/demo6.png' width='210'>
-
-## Downloads?
-
-Follow our **[Telegram channel](https://t.me/ayugram1338)** and join our [chat](https://t.me/ayugramchat)!
-
-Preview versions can be downloaded
-from the **[dedicated topic](https://t.me/ayugramchat/1238)**.
-
-## Want to throw some money?
-
-Developing AyuGram is not such a simple task.
-**We'd be grateful for any donation <3**
-
-All available methods can be found **[here](https://ayusync.cloud/ui/donate)**.
-
-## AyuSync? What is it?
-
-**AyuSync** is our synchronization service.
-You can either use official server or host your own.
-It can sync read states and message history.
-
-Server backend can be found **[here](https://github.com/AyuGram/AyuSyncBackend)**.
-
-## Want to contribute?
-
-I'd be grateful for any contribution, since I don't really like Java. :)
-
-**Work on any feature you want.**
-
-## Want to fork?
-
-Well, just fork it.
-
-**But please, don't forget to mention us in your README.**
-
-## How to build
-
-1. Clone source code using `git clone https://github.com/AyuGram/AyuGram4A.git`
-2. Open the project in Android Studio. It should be opened, **not imported**
-3. Implement the `AyuMessageUtils` & `AyuHistoryHook` classes. It's not that hard, but if you're
-   making your **very** own fork, then you should take some time to write this part of code. Or you can search for a reversed version :)
-4. Replace `google-services.json` (we don't want to see crash reports from your app...)
-5. Generate application certificate and fill API_KEYS:
    ```
    APP_ID = 6
    APP_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
-   MAPS_V2_API = abcdef12345678
-   
-   SIGNING_KEY_PASSWORD = password
-   SIGNING_KEY_ALIAS = alias
-   SIGNING_KEY_STORE_PASSWORD = password
+   MAPS_V2_API = <...>
+
+   SIGNING_KEY_PASSWORD = myPassword
+   SIGNING_KEY_ALIAS = release-key-alias
+   SIGNING_KEY_STORE_PASSWORD = myPassword
    ```
-6. You are ready to compile `AyuGram`
 
-- **AyuGram** can be built with **Android Studio** or from the command line with **Gradle**:
+7. **Get Google Firebase "google-services.json" configuration file**
 
-```
-./gradlew assembleAfatRelease
-```
+   It's required... So just generate it using [this instruction](https://firebase.google.com/docs/android/setup)
+
+8. **Add "google-services.json" to this project**
+
+   Put this file into `TMessageProj/google-services.json`
+
+9. **Build APK!**
+
+   Build APK using `./gradlew <Task name>`
+
+   If you're not sure about your devices ABI,
+   just build using `./gradlew assembleAfat`
+
+   | Task name | Output APK ABI |
+   | :-------- | :---------- |
+   | assembleAfat | **(Recomended)** **"universal apk"** that can be used on all devices |
+   | assembleArm64 | **arm64-v8a** |
+   | assembleArmv7 | **armeabi-v7a** |
+   | assembleX64 | **x86_64** |
+   | assembleX86 | **x86** |
+
+   Other tasks can be listed using `./gradlew tasks`
+
+### Set up Github Actions
+
+#### You can generate base64 string via:
+- Linux terminal: `base64 <filename>`
+- Powershell: `[Convert]::ToBase64String([IO.File]::ReadAllBytes("<filename>"))`
+
+1. Generate keystore file [(it's <u>4th step</u> from the command line tools build instruction)](#build-via-android-command-line-tools) and [convert it into base64](#you-can-generate-base64-string-via)
+2. Generate google-services.json file and [convert it into base64](#you-can-generate-base64-string-via)
+3. [Go to repository settings > Secrets and variables > Actions](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
+4. Add **SIGNING_KEYSTORE_FILE_IN_BASE64** secret with **base64 string generated from <u>1st step</u>**
+5. Add **GOOGLE_SERVICES_JSON_FILE_IN_BASE64** secret with **base64 string generated from <u>2nd step</u>**
+6. Add **SIGNING_KEY_PASSWORD** secret with **keystore file password** value
+7. Add **SIGNING_KEY_ALIAS** secret with **keystore alias name** value
+8. Now you're ready to [run build workflow](https://docs.github.com/en/actions/using-workflows/manually-running-a-workflow#running-a-workflow)!
+
+### Build via Android Studio
+
+Android studio can be downloaded [here](https://developer.android.com/studio)
+
+1. Clone this repository
+2. Open the project in Android Studio. It should be opened, **not imported**
+3. [Generate](https://firebase.google.com/docs/android/setup) and replace `google-services.json` ([he](https://github.com/ZavaruKitsu) don't want to see crash reports from your app...)
+4. Generate signing keys and fill API_KEYS
+5. Build it!
 
 ## AyuGram Localization
 

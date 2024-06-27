@@ -79,15 +79,18 @@ public class AyuSyncPreferencesActivity extends BasePreferencesActivity implemen
     @Override
     public boolean onFragmentCreate() {
         super.onFragmentCreate();
+if (false) { // no ayusync begin
         NotificationCenter.getGlobalInstance().addObserver(this, AyuConstants.AYUSYNC_STATE_CHANGED);
         NotificationCenter.getGlobalInstance().addObserver(this, AyuConstants.AYUSYNC_LAST_SENT_CHANGED);
         NotificationCenter.getGlobalInstance().addObserver(this, AyuConstants.AYUSYNC_LAST_RECEIVED_CHANGED);
         NotificationCenter.getGlobalInstance().addObserver(this, AyuConstants.AYUSYNC_REGISTER_STATUS_CODE_CHANGED);
+} // no ayusync end
         return true;
     }
 
     @Override
     public void didReceivedNotification(int id, int account, Object... args) {
+if (true) return; // no ayusync
         if (id == AyuConstants.AYUSYNC_STATE_CHANGED) {
             if (listAdapter != null) {
                 listAdapter.notifyItemChanged(ayuSyncStatusRow);
@@ -110,14 +113,17 @@ public class AyuSyncPreferencesActivity extends BasePreferencesActivity implemen
     @Override
     public void onFragmentDestroy() {
         super.onFragmentDestroy();
+if (false) { // no ayusync
         NotificationCenter.getGlobalInstance().removeObserver(this, AyuConstants.AYUSYNC_STATE_CHANGED);
         NotificationCenter.getGlobalInstance().removeObserver(this, AyuConstants.AYUSYNC_LAST_SENT_CHANGED);
         NotificationCenter.getGlobalInstance().removeObserver(this, AyuConstants.AYUSYNC_LAST_RECEIVED_CHANGED);
         NotificationCenter.getGlobalInstance().removeObserver(this, AyuConstants.AYUSYNC_REGISTER_STATUS_CODE_CHANGED);
+}
     }
 
     @Override
     protected void onItemClick(View view, int position, float x, float y) {
+if (true) return; // no ayusync
         if (position == serverURLRow) {
             AyuUi.spawnEditBox(
                     getParentActivity(),
@@ -195,6 +201,7 @@ public class AyuSyncPreferencesActivity extends BasePreferencesActivity implemen
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, boolean payload) {
+if (true) return; // no ayusync
             switch (holder.getItemViewType()) {
                 case 1:
                     holder.itemView.setBackground(Theme.getThemedDrawable(mContext, R.drawable.greydivider, Theme.key_windowBackgroundGrayShadow));

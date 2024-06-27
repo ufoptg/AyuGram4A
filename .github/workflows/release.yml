@@ -1,21 +1,17 @@
 name: Build release APK
-on:
-  push:
+on: workflow_dispatch
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-20.04
     env:
       CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
       CCACHE_NOHASHDIR: "true"
       CCACHE_MAXSIZE: "10G"
       CCACHE_HARDLINK: "true"
     steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: recursive
-          fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN }}
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - uses: DamianReeves/write-file-action@master
         with:
@@ -23,12 +19,26 @@ jobs:
           contents: |
             APP_ID = 6
             APP_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
-            MAPS_V2_API = ${{ secrets.MAPS_KEY }}
-            
-            SIGNING_KEY_PASSWORD = ${{ secrets.CERT_KEY }}
-            SIGNING_KEY_ALIAS = ${{ secrets.CERT_KEY }}
-            SIGNING_KEY_STORE_PASSWORD = ${{ secrets.CERT_KEY }}
+            MAPS_V2_API = 0
+
+            SIGNING_KEY_PASSWORD = ${{ secrets.SIGNING_KEY_PASSWORD }}
+            SIGNING_KEY_ALIAS = ${{ secrets.SIGNING_KEY_ALIAS }}
+            SIGNING_KEY_STORE_PASSWORD = ${{ secrets.SIGNING_KEY_PASSWORD }}
           write-mode: overwrite
+
+      - name: Write google-services.json
+        uses: timheuer/base64-to-file@v1.2
+        with:
+          fileName: google-services.json
+          fileDir: ./TMessagesProj
+          encodedString: ${{ secrets.GOOGLE_SERVICES_JSON_FILE_IN_BASE64 }}
+
+      - name: Write signing keystore file
+        uses: timheuer/base64-to-file@v1.2
+        with:
+          fileName: extera.jks
+          fileDir: ./TMessagesProj/config
+          encodedString: ${{ secrets.SIGNING_KEYSTORE_FILE_IN_BASE64 }}
 
       - name: Update packages
         run: sudo apt-get update
@@ -70,7 +80,7 @@ jobs:
           sudo apt-get remove -y azure-cli firefox mono-devel libgl1-mesa-dri
           sudo apt-get autoremove -y
           sudo apt-get clean
-          
+
           echo "Removing large directories"
           sudo rm -rf /usr/share/dotnet/
           sudo rm -rf /usr/local/graalvm/
@@ -79,7 +89,7 @@ jobs:
           sudo rm -rf /usr/local/share/chromium
           sudo rm -rf /usr/local/lib/node_modules
           df -h
-          
+
           sudo apt-get install bison gcc make curl ninja-build ccache -y
 
       - name: Grant execute permission for gradlew

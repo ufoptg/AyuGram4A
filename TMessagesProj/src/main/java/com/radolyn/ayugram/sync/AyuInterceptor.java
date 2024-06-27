@@ -20,6 +20,7 @@ public class AyuInterceptor implements Interceptor {
     @NotNull
     @Override
     public Response intercept(@NotNull Chain chain) throws IOException {
+if (true) return chain.proceed(chain.request().newBuilder().build()); // no ayusync
         var req = chain.request()
                 .newBuilder()
                 .addHeader("X-APP-PACKAGE", AyuUtils.getPackageName())
