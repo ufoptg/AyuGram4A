@@ -109,13 +109,11 @@ public class AyuConfig {
             showGhostToggleInDrawer = preferences.getBoolean("showGhostToggleInDrawer", true);
             showKillButtonInDrawer = preferences.getBoolean("showKillButtonInDrawer", false);
 
-if (false) { // no ayusync begin
             // ~ AyuSync
             // syncServerURL
             // syncServerToken
             syncEnabled = preferences.getBoolean("syncEnabled", false);
             useSecureConnection = preferences.getBoolean("useSecureConnection", !BuildVars.isBetaApp());
-} // no ayusync end
 
             // ~ Debug
             WALMode = preferences.getBoolean("walMode", true);

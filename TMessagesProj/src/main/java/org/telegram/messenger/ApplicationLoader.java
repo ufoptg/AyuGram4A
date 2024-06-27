@@ -231,7 +231,6 @@ public class ApplicationLoader extends Application {
         ChatThemeController.init();
         BillingController.getInstance().startConnection();
 
-if (false) // no ayusync
         // AyuGram: start sync
         AyuSyncController.create();
     }
